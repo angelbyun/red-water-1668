@@ -9,14 +9,14 @@ RSpec.describe 'dish show page', type: :feature do
   let!(:dish_3) { Dish.create!(name: "Pad Kee Mao", description: "Thai", chef: chef_2) }
   let!(:dish_4) { Dish.create!(name: "Cheeseburger", description: "American", chef: chef_2) }
 
-  let!(:ingredient_1) {Ingredient.create!(name: "Beef") }
-  let!(:ingredient_2) {Ingredient.create!(name: "Tortilla") }
-  let!(:ingredient_3) {Ingredient.create!(name: "Chicken") }
-  let!(:ingredient_4) {Ingredient.create!(name: "Parmisian Cheese") }
-  let!(:ingredient_5) {Ingredient.create!(name: "Rice Noodle") }
-  let!(:ingredient_6) {Ingredient.create!(name: "Thai Basil") }
-  let!(:ingredient_7) {Ingredient.create!(name: "Hamburger bun") }
-  let!(:ingredient_8) {Ingredient.create!(name: "Vegan Patty") }
+  let!(:ingredient_1) {Ingredient.create!(name: "Beef", calories: 100) }
+  let!(:ingredient_2) {Ingredient.create!(name: "Tortilla", calories: 50) }
+  let!(:ingredient_3) {Ingredient.create!(name: "Chicken", calories: 60) }
+  let!(:ingredient_4) {Ingredient.create!(name: "Parmisian Cheese", calories: 150) }
+  let!(:ingredient_5) {Ingredient.create!(name: "Rice Noodle", calories: 40) }
+  let!(:ingredient_6) {Ingredient.create!(name: "Thai Basil", calories: 10) }
+  let!(:ingredient_7) {Ingredient.create!(name: "Hamburger Bun", calories: 70) }
+  let!(:ingredient_8) {Ingredient.create!(name: "Vegan Patty", calories: 30) }
 
   before do
     DishIngredient.create!(dish: dish_1, ingredient: ingredient_1)
@@ -42,6 +42,12 @@ RSpec.describe 'dish show page', type: :feature do
 
       expect(page).to have_content(ingredient_1.name)
       expect(page).to have_content(ingredient_2.name)
+    end
+
+    it 'lists the total calorie for a dish' do
+      visit "/dishes/#{dish_1.id}"
+
+      expect(page).to have_content(150)
     end
   end
 end
