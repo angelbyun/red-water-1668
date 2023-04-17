@@ -1,7 +1,7 @@
 <h1>Dish Show Page</h1>
 
 <h2><%= @dish.name %></h3>
-<p><b>Chef Name: </b><%= @dish.chef.name%>
+<p><b>Chef Name: </b><%= @dish.chef.name %>
 <p><b>Description: </b><%= @dish.description %>
 <p><b>Total Calorie: </b><%= @dish.calorie_count%>
 
@@ -11,3 +11,12 @@
   <li><%= ingredient.name %></li>
 <% end %>
 </ul>
+
+<h3>Add Ingredients</h3>
+<%= form_with url: "/dishes/#{@dish.id}", method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :calories %>
+  <%= form.text_field :calories %>
+  <%= form.submit 'Add Ingredient' %>
+<% end %>

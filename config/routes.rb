@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  resources :dishes, only: [:show]
+  post '/dishes/:id', to: 'dishes#create'
+  
+  resources :dishes, only: [:show, :update]
 end
