@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_16_234229) do
+ActiveRecord::Schema.define(version: 2023_04_17_020606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chef_ingredients", force: :cascade do |t|
+    t.bigint "chef_id"
+    t.bigint "ingredient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chef_id"], name: "index_chef_ingredients_on_chef_id"
+    t.index ["ingredient_id"], name: "index_chef_ingredients_on_ingredient_id"
+  end
 
   create_table "chefs", force: :cascade do |t|
     t.string "name"
@@ -46,6 +55,8 @@ ActiveRecord::Schema.define(version: 2023_04_16_234229) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "chef_ingredients", "chefs"
+  add_foreign_key "chef_ingredients", "ingredients"
   add_foreign_key "dish_ingredients", "dishes"
   add_foreign_key "dish_ingredients", "ingredients"
   add_foreign_key "dishes", "chefs"
